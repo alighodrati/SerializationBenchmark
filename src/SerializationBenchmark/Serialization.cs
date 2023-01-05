@@ -7,32 +7,28 @@ namespace SerializationBenchmark;
 [MemoryDiagnoser]
 public class Serialization
 {
-    SampleModel _sampleModel=new();
+    SampleModel _sampleModel = new();
+    string _serilizeStr = System.Text.Json.JsonSerializer.Serialize(new SampleModel());
 
     [Benchmark]
-    public void SerializeNewtonsoftJson()
+    public void Json_Serialize_Newtonsoft()
     {
         Newtonsoft.Json.JsonConvert.SerializeObject(_sampleModel);
     }
 
     [Benchmark]
-    public void SerializeSystemTextJson()
+    public void Json_Serialize_SystemTextJson()
     {
         System.Text.Json.JsonSerializer.Serialize(_sampleModel);
     }
     [Benchmark]
-    public void SerializeSystemTextSerializeToUtf8Bytes()
+    public void Byte_Serialize_SystemTextUtf8Bytes()
     {
         System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(_sampleModel);
     }
     [Benchmark]
-    public void SerializeByteFromJsonSytemText()
+    public void Byte_From_String()
     {
-        Encoding.Unicode.GetBytes(System.Text.Json.JsonSerializer.Serialize(_sampleModel));
-    }
-    [Benchmark]
-    public void SerializeByteFromJsonNewtonsoft()
-    {
-        Encoding.Unicode.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(_sampleModel));
+        Encoding.Unicode.GetBytes(_serilizeStr);
     }
 }

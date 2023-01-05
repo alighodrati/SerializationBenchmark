@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
 using SerializationBenchmark;
 
-var summary = BenchmarkRunner.Run<Serialization>();
+BenchmarkRunner.Run<Serialization>();
+BenchmarkRunner.Run<Desrialization>();
